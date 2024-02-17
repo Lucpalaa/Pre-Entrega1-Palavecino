@@ -16,7 +16,7 @@ const Checkout = () => {
   const [ordenId, setOrdenId] = useState("");
   const [error, setError] = useState("");
 
-  const manejadorSubmit = (event) => {
+  const manejadorSubmit = async (event) => {
     event.preventDefault();
 
     if (!nombre || !apellido || !telefono || !email || !emailConfirmacion) {
@@ -25,7 +25,7 @@ const Checkout = () => {
     }
 
     if (email !== emailConfirmacion) {
-      setError("Los emails no coinciden, rata de dos patas!");
+      setError("Los emails no coinciden!");
       return;
     }
 
@@ -43,45 +43,48 @@ const Checkout = () => {
       email,
     };
 
-    Promise.all(
-      orden.items.map(async (productoOrden) => {
-        const productoRef = doc(db, "inventario", productoOrden.id);
-        const productoDoc = await getDoc(productoRef);
-        const stockActual = productoDoc.data().stock;
+    try {
+      await Promise.all(
+        orden.items.map(async (productoOrden) => {
+          const productoRef = doc(db, "inventario", productoOrden.id);
+          const productoDoc = await getDoc(productoRef);
+          const stockActual = productoDoc.data().stock;
 
-        await updateDoc(productoRef, {
-          stock: stockActual - productoOrden.cantidad,
-        });
-      })
-    )
-      .then(() => {
-        addDoc(collection(db, "ordenes"), orden)
-          .then((docRef) => {
-            setOrdenId(docRef.id);
-            vaciarCarrito();
+          await updateDoc(productoRef, {
+            stock: stockActual - productoOrden.cantidad,
+          });
+        })
+      );
 
-            Swal.fire({
-              title: "Orden generada exitosamente!!",
-              icon: "success",
-              text: `Gracias por la compra!! Tu numero de orden es: ${docRef.id}`,
-              showCancelButton: true,
-              confirmButtonText: "Confirmar",
-              cancelButtonText: "Cancelar",
-            }).then((result) => {
-              if (result.isConfirmed) {
-                window.location.href = "/";
-              }
-            });
-          })
-          .catch((error) =>
-            console.log("Error al confeccionar la Orden", error)
-          );
-      })
+      const docRef = await addDoc(collection(db, "ordenes"), orden);
+      setOrdenId(docRef.id);
+      vaciarCarrito();
 
-      .catch((error) => {
-        console.log("No se pudo actualizar el stock", error);
-        setError("Error no se pudo actualizar el stock");
+      Swal.fire({
+        title: "Orden generada exitosamente!!",
+        icon: "success",
+        text: `Gracias por la compra!! Tu numero de orden es: ${docRef.id}`,
+        showCancelButton: true,
+        confirmButtonText: "Confirmar",
+        cancelButtonText: "Cancelar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "/";
+        }
       });
+    } catch (error) {
+      console.log("Error:", error);
+      setError("Error al procesar la orden.");
+    }
+  };
+
+  const manejarBorrar = () => {
+    setNombre("");
+    setApellido("");
+    setTelefono("");
+    setEmail("");
+    setEmailConfirmacion("");
+    setError("");
   };
 
   return (
@@ -153,19 +156,22 @@ const Checkout = () => {
         {error && <p style={{ color: "red" }}> {error} </p>}
 
         <div className="botones">
-          <button className="miBtn checkout" disabled={carrito.length === 0}>
+          <button
+            className="miBtn checkout"
+            disabled={carrito.length === 0}
+            type="submit"
+          >
             {" "}
             Finalizar Orden{" "}
           </button>
-          <button className="miBtn checkout" type="reset">
+          <button className="miBtn checkout" type="button" onClick={manejarBorrar}>
             {" "}
             Borrar{" "}
           </button>
         </div>
         {ordenId && (
           <strong>
-            ¡Gracias por su compra! Tu número de orden es el siguiente:{" "}
-            {ordenId}{" "}
+            ¡Gracias por su compra! Tu número de orden es el siguiente: {ordenId}{" "}
           </strong>
         )}
       </form>
