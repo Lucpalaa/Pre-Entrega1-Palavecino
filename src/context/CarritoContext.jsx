@@ -16,9 +16,9 @@ export const CarritoProvider = ({ children }) => {
     const [cantidadTotal, setCantidadTotal] = useState(0);
 
    
-    console.log(carrito);
-    console.log("Monto total de la compra: ", total);
-    console.log("Cantidad de items: ", cantidadTotal);
+    // console.log(carrito);
+    // console.log("Monto total de la compra: ", total);
+    // console.log("Cantidad de items: ", cantidadTotal);
 
    
 

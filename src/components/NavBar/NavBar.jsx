@@ -1,49 +1,66 @@
 import CartWidget from "../CardWidget/CardWidget";
-import {Link, NavLink} from "react-router-dom";
-import './NavBar.css';
-
+import { Link, NavLink } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css"; // Asegúrate de importar los estilos de Bootstrap correctamente
+import "../NavBar/NavBar.css"; // Importa el archivo de estilos local si es necesario
 
 const NavBar = () => {
   return (
     <header>
-      <Link to="/">
-        <img className='logo' src="./img/logo.png" alt="Logovg" />
-      </Link>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light"> {/* Corrige la clase de fondo de la barra de navegación */}
+        <div className="container">
+          <Link to="/" className="navbar-brand">
+            <img className="logo" src="./img/logo.png" alt="Logovg" />
+          </Link>
+          
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
 
-        <nav>
-            <ul>
+          <div
+            className="collapse navbar-collapse"
+            id="navbarSupportedContent"
+          >
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/Categoria/1">
+                  Zapatillas
+                </NavLink>
+              </li>
 
-                <li>
-                  <NavLink className="miBtn" to="/Categoria/1">
-                    Zapatillas
-                  </NavLink>
-                </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/Categoria/2">
+                  Remeras
+                </NavLink>
+              </li>
 
-                <li>
-                  <NavLink className="miBtn" to="/Categoria/2">
-                    Remeras
-                  </NavLink>
-                </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/Categoria/3">
+                  Buzos
+                </NavLink>
+              </li>
 
-                <li>
-                  <NavLink className="miBtn" to="/Categoria/3">
-                    Buzos
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink className="miBtn" to="/Categoria/4">
-                    Conjuntos
-                  </NavLink>
-                </li>
-
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/Categoria/4">
+                  Conjuntos
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <CartWidget />
+              </li>
             </ul>
-        </nav>
-        
-        <CartWidget/>
-
+          </div>
+        </div>
+      </nav>
     </header>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

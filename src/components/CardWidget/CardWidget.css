@@ -1,3 +1,18 @@
 .imgCarrito {
-    width: 50px;
-}
+    width: 80px;
+    height: 80px;
+    border: bisque 3px solid;
+    text-decoration: none;
+    transition: width 0.5s, height 0.5s;
+    border-radius: 30%;
+    }  
+    
+    .cantidad {
+    color: white;
+    text-shadow: 5px 5px 5px rgb(193, 194, 141);
+    }
+    
+    .imgCarrito:hover {
+        width: 90px;
+        height: 90px;
+    }
