@@ -1,24 +1,49 @@
-import CardWidget from '../CardWidget/CardWidget';
+import CartWidget from "../CardWidget/CardWidget";
+import {Link, NavLink} from "react-router-dom";
 import './NavBar.css';
-import {Link, NavLink} from "react-router-dom"
 
-const Navbar = () => {
+
+const NavBar = () => {
   return (
     <header>
       <Link to="/">
-        <h1 className='h1'>Tienda de Ropa</h1>
+        <img className='logo' src="./img/logo.png" alt="Logovg" />
       </Link>
+
         <nav>
             <ul>
-                <li><NavLink to="/categoria/2">Zapatillas</NavLink></li>
-              
-                <li><NavLink to="/categoria/3">Conjuntos</NavLink></li>
-              
+
+                <li>
+                  <NavLink className="miBtn" to="/Zapatillas/1">
+                    Zapatillas
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink className="miBtn" to="/Remeras/2">
+                    Remeras
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink className="miBtn" to="/Buzos/3">
+                    Buzos
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink className="miBtn" to="/Conjuntos/4">
+                    Conjuntos
+                  </NavLink>
+                </li>
+
             </ul>
         </nav>
-        <CardWidget/>
+        
+        <CartWidget/>
+
     </header>
   )
 }
 
-export default Navbar
+export default NavBar

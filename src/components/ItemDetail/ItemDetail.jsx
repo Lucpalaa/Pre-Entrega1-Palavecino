@@ -3,15 +3,28 @@ import ItemCount from '../ItemCount/ItemCount';
 import { Link } from 'react-router-dom';
 import './ItemDetail.css';
 
+
+import { CarritoContext } from '../../context/CarritoContext';
+
+import { useContext } from 'react';
+
 const ItemDetail = ({ id, nombre, stock, precio, img }) => {
-  //Creamos  un estado local con la cantidad de productos agregados. 
+  
   const [agregarCantidad, setAgregarCantidad] = useState(0);
 
-  //Creamos una función manejadora de la cantidad
+  
+
+  const {agregarAlCarrito} = useContext(CarritoContext);
+
+
+ 
 
   const manejadorCantidad =  (cantidad) => {
     setAgregarCantidad(cantidad);
-    console.log("Productos agregados: " + cantidad);
+    
+    const item = {id, nombre, precio};
+    agregarAlCarrito(item, cantidad);
+
   }
 
   return (
@@ -24,7 +37,7 @@ const ItemDetail = ({ id, nombre, stock, precio, img }) => {
       <img src={img} alt={nombre} />
 
       {
-        /// Acá empleamos la lógica de montaje y desmontaje del contador
+        
       }
 
       {
