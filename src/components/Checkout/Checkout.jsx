@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { CarritoContext } from "../../context/CarritoContext";
 import { db } from "../../services/config";
 import { collection, addDoc, updateDoc, getDoc, doc } from "firebase/firestore";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import "./Checkout.css";
 
 const Checkout = () => {
@@ -43,48 +43,46 @@ const Checkout = () => {
       email,
     };
 
-    Promise.all (
-        orden.items.map( async (libroOrden)=>{
-        const libroRef = doc(db, "items", libroOrden.id)    
-        const libroDoc= await getDoc(libroRef)
-        const stockActual = libroDoc.data().stock;
-        await updateDoc (libroRef, {stock: stockActual - libroOrden.cantidad})
-    })
+    Promise.all(
+      orden.items.map(async (productoOrden) => {
+        const productoRef = doc(db, "inventario", productoOrden.id);
+        const productoDoc = await getDoc(productoRef);
+        const stockActual = productoDoc.data().stock;
+
+        await updateDoc(productoRef, {
+          stock: stockActual - productoOrden.cantidad,
+        });
+      })
     )
-    .then(()=> {
-        addDoc (collection(db, "orders"), orden)
-        .then (docRef=> {
-            setOrdenId (docRef.id)
-            vaciarCarrito();               
-            setNombre("");
-            setApellido("");
-            setTelefono("");
-            setEmail("");
-            setEmailConfirmacion("");  
-            
-              Swal.fire({
-                title: "Orden generada exitosamente!!",
-                icon: "success",
-                text: `Gracias por la compra!! Tu numero de orden es: ${docRef.id}`,
-                showCancelButton: true,
-                confirmButtonText: 'Confirmar',
-                cancelButtonText: 'Cancelar',
-              }).then((result) => {
-                if (result.isConfirmed) {                      
-                  window.location.href = '/';                     }
-              });
-            
-        })                   
-        .catch (error => console.log ("Error al confeccionar la Orden",error) )
-        })
-    
-        .catch (error => {
-            console.log ("No se pudo actualizar el stock", error)
-        setError ("Error no se pudo actualizar el stock")
-        
-    })
-    
-}       
+      .then(() => {
+        addDoc(collection(db, "ordenes"), orden)
+          .then((docRef) => {
+            setOrdenId(docRef.id);
+            vaciarCarrito();
+
+            Swal.fire({
+              title: "Orden generada exitosamente!!",
+              icon: "success",
+              text: `Gracias por la compra!! Tu numero de orden es: ${docRef.id}`,
+              showCancelButton: true,
+              confirmButtonText: "Confirmar",
+              cancelButtonText: "Cancelar",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.href = "/";
+              }
+            });
+          })
+          .catch((error) =>
+            console.log("Error al confeccionar la Orden", error)
+          );
+      })
+
+      .catch((error) => {
+        console.log("No se pudo actualizar el stock", error);
+        setError("Error no se pudo actualizar el stock");
+      });
+  };
 
   return (
     <div>
