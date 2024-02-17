@@ -14,25 +14,25 @@ const NavBar = () => {
             <ul>
 
                 <li>
-                  <NavLink className="miBtn" to="/Zapatillas/1">
+                  <NavLink className="miBtn" to="/Categoria/1">
                     Zapatillas
                   </NavLink>
                 </li>
 
                 <li>
-                  <NavLink className="miBtn" to="/Remeras/2">
+                  <NavLink className="miBtn" to="/Categoria/2">
                     Remeras
                   </NavLink>
                 </li>
 
                 <li>
-                  <NavLink className="miBtn" to="/Buzos/3">
+                  <NavLink className="miBtn" to="/Categoria/3">
                     Buzos
                   </NavLink>
                 </li>
 
                 <li>
-                  <NavLink className="miBtn" to="/Conjuntos/4">
+                  <NavLink className="miBtn" to="/Categoria/4">
                     Conjuntos
                   </NavLink>
                 </li>
