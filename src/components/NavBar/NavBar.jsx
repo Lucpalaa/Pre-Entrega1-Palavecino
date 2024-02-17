@@ -9,7 +9,7 @@ const NavBar = () => {
       <nav className="navbar navbar-expand-lg navbar-light bg-light"> {/* Corrige la clase de fondo de la barra de navegación */}
         <div className="container">
           <Link to="/" className="navbar-brand">
-            <img className="logo" src="./img/logo.png" alt="Logovg" />
+            <img className="logo" src="../img/logo.png" alt="Logovg" />
           </Link>
           
           <button

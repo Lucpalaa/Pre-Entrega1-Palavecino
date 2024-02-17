@@ -3,7 +3,7 @@
     height: 80px;
     border: bisque 3px solid;
     text-decoration: none;
-    transition: width 0.5s, height 0.5s;
+    transition: width 0.1s, height 0.1s;
     border-radius: 30%;
     }  
     

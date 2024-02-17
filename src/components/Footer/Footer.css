@@ -1,9 +1,16 @@
 .footer {
-  background: #202020;
-  width: 100%;
-  margin-top: 225px;
-  justify-content: center;
-  
+  background-color: black;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
+.blockquote {
+  margin-bottom: 0;
+}
+
+.blockquote p {
+  margin-bottom: 10px;
+}
