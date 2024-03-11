@@ -1,12 +1,12 @@
 import CartWidget from "../CardWidget/CardWidget";
 import { Link, NavLink } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css"; // Asegúrate de importar los estilos de Bootstrap correctamente
-import "../NavBar/NavBar.css"; // Importa el archivo de estilos local si es necesario
+import "bootstrap/dist/css/bootstrap.min.css"; 
+import "../NavBar/NavBar.css";
 
 const NavBar = () => {
   return (
     <header>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light"> {/* Corrige la clase de fondo de la barra de navegación */}
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
           <Link to="/" className="navbar-brand">
             <img className="logo" src="../img/logo.png" alt="Logovg" />
