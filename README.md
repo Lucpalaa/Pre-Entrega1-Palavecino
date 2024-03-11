@@ -1,6 +1,6 @@
 # VG TIENDA
 
-Es una tienda ecommerse orientada a la venta de ropa y calzado, proyecto desarrollado para el curso de React en CODERHOUSE.
+Es una tienda ecommerse orientada a la venta de ropa y calzado, proyecto desarrollado para el curso de React en CODERHOUSE. Las compras se almacenan en firebase donde se actualiza el stock y precio de los productos, como así también las órdenes de compra que nos permiten tener todos los datos del comprador. 
 
 ## Tecnologías Utilizadas:
 
