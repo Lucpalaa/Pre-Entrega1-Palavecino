@@ -13,11 +13,11 @@ Es una tienda ecommerse orientada a la venta de ropa y calzado, proyecto desarro
 
 ## Funcionalidades:
 
--Catálogo:
+- Catálogo:
 Muestra un listado de prendas y calzado disponibles para la compra, con imágenes y precios, utilizando componentes de React
 - Carrito de Compras:
 Permite a los usuarios agregar productos al carrito de compras, eliminar productos o vaciar el carrito.
--Finalizar la comprar recibiendo una Orden Id.
+- Finalizar la comprar recibiendo una Orden Id.
 
 ### Instalación:
 
