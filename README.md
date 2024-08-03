@@ -28,4 +28,5 @@ Permite a los usuarios agregar productos al carrito de compras, eliminar product
 - Framework de CSS para el diseño de páginas web.
 
 ### Visualización:
-El proyecto se puede ver de forma local.
+https://vgtienda.netlify.app/
+También se puede ver de forma local.
